@@ -1,0 +1,65 @@
+%% =============================================================================
+%% nilpotent_def
+%%   Nilpotent elements and reduced rings (rings with identity).
+%%  =============================================================================
+
+nilpotent_def [T: TYPE+, +, *: [T, T -> T], zero, one: T]: THEORY
+BEGIN
+
+  ASSUMING
+    IMPORTING algebra@ring_with_one_def[T, +, *, zero, one]
+    fullset_is_ring_with_one: ASSUMPTION ring_with_one?(fullset[T])
+  ENDASSUMING
+
+  IMPORTING algebra@ring_with_one[T, +, *, zero, one],
+            algebra@monoid_def[T, *, one],
+            idempotent_def[T, *],
+            special_subrings[T, +, *, zero]
+
+  R:          VAR (ring_with_one?)
+  a, b, r, x: VAR T
+  m:          VAR nat
+  n:          VAR posnat
+
+  ring_with_one_is_groupoid: JUDGEMENT (ring_with_one?) SUBTYPE_OF (groupoid?[T, *])
+
+  % one is the identity of every R: (ring_with_one?).
+  one_unital: LEMMA unital?(R)(one)
+
+  power_closed: LEMMA R(a) IMPLIES R(power[T, *, one](a, m))
+
+  idempotent_power: LEMMA
+    idempotent?[T, *](R)(a) IMPLIES power[T, *, one](a, n) = a
+
+  %% ---------------------------------------------------------------------------
+
+  nilpotent?(R)(a): bool =
+    R(a) AND EXISTS (n: posnat): power[T, *, one](a, n) = zero
+
+  reduced_ring?(R): bool =
+    FORALL (x: (R)): nilpotent?(R)(x) IMPLIES x = zero
+
+  % A ring is reduced iff it has no non-zero element of square zero.
+  reduced_ring_equiv: LEMMA
+    reduced_ring?(R) IFF FORALL (a: (R)): a * a = zero IMPLIES a = zero
+
+  % In a reduced ring, zero products commute and absorb ring elements.
+  reduced_zero_product_commute: LEMMA
+    reduced_ring?(R) IMPLIES
+      FORALL (a, b: (R)): a * b = zero IMPLIES b * a = zero
+
+  reduced_zero_product_insert: LEMMA
+    reduced_ring?(R) IMPLIES
+      FORALL (a, b, r: (R)): a * b = zero IMPLIES a * r * b = zero
+
+  % Hence left and right annihilators coincide in a reduced ring.
+  reduced_lann_eq_rann: LEMMA
+    reduced_ring?(R) IMPLIES
+      FORALL (S: set[T]): subset?(S, R) IMPLIES lann(R)(S) = rann(R)(S)
+
+  % Every idempotent of a reduced ring is central.
+  reduced_idempotent_central: LEMMA
+    reduced_ring?(R) IMPLIES
+      FORALL (e: (idempotent?[T, *](R)), r: (R)): e * r = r * e
+
+END nilpotent_def

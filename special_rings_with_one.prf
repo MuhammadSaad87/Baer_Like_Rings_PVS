@@ -1,0 +1,1143 @@
+(|special_rings_with_one|
+ (|IMP_ring_with_one_TCC1| 0
+  (|IMP_ring_with_one_TCC1-1| NIL 3970000000
+   ("" (LEMMA "fullset_is_ring_with_one") (("" (PROPAX) NIL NIL)) NIL)
+   ((|fullset_is_ring_with_one| FORMULA-DECL NIL |special_rings_with_one| NIL))
+   SHOSTAK
+   (|IMP_ring_with_one| ASSUMING
+    "algebra@ring_with_one[special_rings_with_one.T, special_rings_with_one.+, special_rings_with_one.*, special_rings_with_one.zero, special_rings_with_one.one].ring_with_one"
+    "fullset_is_ring_with_one: ASSUMPTION ring_with_one_def[ring_with_one.T, ring_with_one.+, ring_with_one.*, ring_with_one.zero, ring_with_one.one].ring_with_one?(sets[ring_with_one.T].fullset)")))
+ (|IMP_ring_with_one_principal_ideal_def_TCC1| 0
+  (|IMP_ring_with_one_principal_ideal_def_TCC1-1| NIL 3970000000
+   ("" (LEMMA "fullset_is_ring_with_one")
+    (("" (EXPAND "ring_with_one?") (("" (FLATTEN) NIL NIL)) NIL)) NIL)
+   ((|fullset_is_ring_with_one| FORMULA-DECL NIL |special_rings_with_one| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|))
+   SHOSTAK
+   (|IMP_ring_with_one_principal_ideal_def| ASSUMING
+    "ring_with_one_principal_ideal_def[special_rings_with_one.T, special_rings_with_one.+, special_rings_with_one.*, special_rings_with_one.zero].ring_with_one_principal_ideal_def"
+    "fullset_is_ring: ASSUMPTION ring_def[ring_with_one_principal_ideal_def.T, ring_with_one_principal_ideal_def.+, ring_with_one_principal_ideal_def.*, ring_with_one_principal_ideal_def.zero].ring?(sets[ring_with_one_principal_ideal_def.T].fullset)")))
+ (|left_semicentral_alt| 0
+  (|left_semicentral_alt-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (EXPAND "left_semicentral_idempotent?")
+      (("" (ASSERT)
+        (("" (SPLIT)
+          (("1" (FLATTEN)
+            (("1" (SKEEP)
+              (("1" (INST -1 "r")
+                (("1" (REWRITE "left_distributive" 1)
+                  (("1" (REWRITE "left_distributive" 1)
+                    (("1" (REWRITE "negative_times" 1)
+                      (("1" (REWRITE "negative_times" 1)
+                        (("1" (ASSERT) NIL NIL)) NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL)
+           ("2" (FLATTEN)
+            (("2" (SKEEP)
+              (("2" (INST -1 "r")
+                (("2" (REWRITE "left_distributive" -1)
+                  (("2" (REWRITE "left_distributive" -1)
+                    (("2" (REWRITE "negative_times" -1)
+                      (("2" (REWRITE "negative_times" -1)
+                        (("2" (ASSERT)
+                          (("2"
+                            (LEMMA "cancel_right_minus"
+                             ("x" "r*e" "y" "e*r*e" "z" "e*r*e"))
+                            (("2" (ASSERT) NIL NIL)) NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|left_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|one_times| FORMULA-DECL NIL |ring_with_one| |algebra|)
+    (|left_distributive| FORMULA-DECL NIL |ring| |algebra|)
+    (AND CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (= CONST-DECL "[T, T -> boolean]" |equalities| NIL)
+    (|inv| CONST-DECL "{y | x * y = one AND y * x = one}" |group| |algebra|)
+    (|negative_times| FORMULA-DECL NIL |ring| |algebra|)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|inv_right| FORMULA-DECL NIL |group| |algebra|)
+    (|cancel_right_minus| FORMULA-DECL NIL |ring| |algebra|))
+   SHOSTAK))
+ (|right_semicentral_alt| 0
+  (|right_semicentral_alt-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (EXPAND "right_semicentral_idempotent?")
+      (("" (ASSERT)
+        (("" (SPLIT)
+          (("1" (FLATTEN)
+            (("1" (SKEEP)
+              (("1" (INST? :IF-MATCH ALL)
+                (("1"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("2"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("3"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("4"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("5"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("6"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("7"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL)
+                 ("8"
+                  (GRIND :IF-MATCH ALL :REWRITES
+                   ("right_distributive" "times_negative"))
+                  NIL NIL))
+                NIL))
+              NIL))
+            NIL)
+           ("2" (FLATTEN)
+            (("2" (SKEEP)
+              (("2" (INST? :IF-MATCH ALL)
+                (("1"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("1"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("2"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("2"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("3"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("3"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("4"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("4"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("5"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("5"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("6"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("6"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("7"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("7"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL)
+                 ("8"
+                  (LEMMA "cancel_right_minus"
+                   ("x" "e*r" "y" "e*r*e" "z" "e*r*e"))
+                  (("8"
+                    (GRIND :IF-MATCH ALL :REWRITES
+                     ("right_distributive" "times_negative"))
+                    NIL NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|r| SKOLEM-CONST-DECL "(R)" |special_rings_with_one| NIL)
+    (|left_identity| FORMULA-DECL NIL |monad| |algebra|)
+    (|inv_one| FORMULA-DECL NIL |group| |algebra|)
+    (|inv_right| FORMULA-DECL NIL |group| |algebra|)
+    (|cancel_right_minus| FORMULA-DECL NIL |ring| |algebra|)
+    (|inv| CONST-DECL "{y | x * y = one AND y * x = one}" |group| |algebra|)
+    (= CONST-DECL "[T, T -> boolean]" |equalities| NIL)
+    (AND CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (|r| SKOLEM-CONST-DECL "(R)" |special_rings_with_one| NIL)
+    (|e| SKOLEM-CONST-DECL "T" |special_rings_with_one| NIL)
+    (R SKOLEM-CONST-DECL "(ring_with_one?)" |special_rings_with_one| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|right_distributive| FORMULA-DECL NIL |ring| |algebra|)
+    (|times_one| FORMULA-DECL NIL |ring_with_one| |algebra|)
+    (|times_negative| FORMULA-DECL NIL |ring| |algebra|)
+    (|zero_times| FORMULA-DECL NIL |ring| |algebra|)
+    (|times_zero| FORMULA-DECL NIL |ring| |algebra|)
+    (|right_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL))
+   SHOSTAK))
+ (|central_idempotent_char| 0
+  (|central_idempotent_char-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (EXPAND "central_idempotent?")
+      (("" (EXPAND "left_semicentral_idempotent?")
+        (("" (EXPAND "right_semicentral_idempotent?")
+          (("" (SPLIT)
+            (("1" (FLATTEN)
+              (("1" (SPLIT)
+                (("1" (PROPAX) NIL NIL)
+                 ("2" (SKEEP)
+                  (("2" (INST -2 "r")
+                    (("2" (INST -4 "r") (("2" (ASSERT) NIL NIL)) NIL)) NIL))
+                  NIL))
+                NIL))
+              NIL)
+             ("2" (FLATTEN)
+              (("2" (EXPAND "idempotent?")
+                (("2" (FLATTEN)
+                  (("2" (SPLIT)
+                    (("1" (PROPAX) NIL NIL) ("2" (PROPAX) NIL NIL)
+                     ("3" (SKEEP)
+                      (("3" (INST -3 "r")
+                        (("3"
+                          (LEMMA "times_associative" ("x" "r" "y" "e" "z" "e"))
+                          (("3" (REPLACE -3 -1) (("3" (ASSERT) NIL NIL)) NIL))
+                          NIL))
+                        NIL))
+                      NIL)
+                     ("4" (PROPAX) NIL NIL) ("5" (PROPAX) NIL NIL)
+                     ("6" (SKEEP)
+                      (("6" (INST -3 "r")
+                        (("6"
+                          (LEMMA "times_associative" ("x" "e" "y" "r" "z" "e"))
+                          (("6"
+                            (LEMMA "times_associative"
+                             ("x" "e" "y" "e" "z" "r"))
+                            (("6" (REPLACE -4 -1) (("6" (ASSERT) NIL NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|central_idempotent?| CONST-DECL "bool" |special_rings_with_one| NIL)
+    (|right_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|times_associative| FORMULA-DECL NIL |ring| |algebra|)
+    (|idempotent?| CONST-DECL "bool" |idempotent_def| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|left_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL))
+   SHOSTAK))
+ (|left_semicentral_iff_ideal| 0
+  (|left_semicentral_iff_ideal-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (COPY -1)
+      (("" (EXPAND "idempotent?" -1)
+        (("" (FLATTEN)
+          (("" (LEMMA "right_principal_ideal_is_ideal" ("R" "R"))
+            (("" (INST -1 "e")
+              (("" (LEMMA "right_principal_ideal_idempotent" ("R" "R" "e" "e"))
+                (("" (ASSERT)
+                  (("" (EXPAND "left_semicentral_idempotent?")
+                    (("" (EXPAND "ideal?")
+                      (("" (SPLIT)
+                        (("1" (FLATTEN)
+                          (("1" (ASSERT)
+                            (("1" (REWRITE "left_ideal_equiv")
+                              (("1" (REWRITE "right_ideal_equiv" -3)
+                                (("1" (FLATTEN)
+                                  (("1" (SPLIT)
+                                    (("1" (PROPAX) NIL NIL)
+                                     ("2" (PROPAX) NIL NIL)
+                                     ("3" (SKEEP :PREDS? T)
+                                      (("3" (SPLIT)
+                                        (("1" (INST -8 "x" "y" "r")
+                                          (("1" (FLATTEN) NIL NIL)) NIL)
+                                         ("2" (INST -4 "r")
+                                          (("2"
+                                            (LEMMA
+                                             "right_principal_ideal_idempotent"
+                                             ("R" "R" "e" "e" "x" "x"))
+                                            (("2"
+                                              (LEMMA
+                                               "right_principal_ideal_idempotent"
+                                               ("R" "R" "e" "e" "x" "r*x"))
+                                              (("2" (ASSERT)
+                                                (("2" (FLATTEN)
+                                                  (("2"
+                                                    (LEMMA "R_prod_star_closed"
+                                                     ("x" "r" "y" "x" "R" "R"))
+                                                    (("2" (EXPAND "member")
+                                                      (("2"
+                                                        (LEMMA
+                                                         "times_associative"
+                                                         ("x" "e" "y" "r" "z"
+                                                          "x"))
+                                                        (("2"
+                                                          (LEMMA
+                                                           "times_associative"
+                                                           ("x" "e*r" "y" "e"
+                                                            "z" "x"))
+                                                          (("2"
+                                                            (LEMMA
+                                                             "times_associative"
+                                                             ("x" "r" "y" "e"
+                                                              "z" "x"))
+                                                            (("2" (ASSERT) NIL
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL)
+                         ("2" (FLATTEN)
+                          (("2" (SKEEP)
+                            (("2" (EXPAND "left_ideal?" -1)
+                              (("2" (FLATTEN)
+                                (("2" (EXPAND "left_swallow?" -2)
+                                  (("2" (INST-CP -3 "e")
+                                    (("2"
+                                      (LEMMA "times_associative"
+                                       ("x" "e" "y" "r" "z" "e"))
+                                      (("2" (INST -4 "r*e")
+                                        (("2" (INST -3 "r" "e")
+                                          (("1" (EXPAND "member")
+                                            (("1" (ASSERT) NIL NIL)) NIL)
+                                           ("2" (ASSERT) NIL NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((R SKOLEM-CONST-DECL "(ring_with_one?)" |special_rings_with_one| NIL)
+    (|e| SKOLEM-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|ideal?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|left_ideal?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|left_swallow?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|member| CONST-DECL "bool" |sets| NIL)
+    (|subset_is_partial_order| NAME-JUDGEMENT "(partial_order?[set[T]])"
+     |sets_lemmas| NIL)
+    (|ring| NONEMPTY-TYPE-EQ-DECL NIL |ring| |algebra|)
+    (|right_principal_ideal_unity| CONST-DECL "set[T]"
+     |ring_with_one_principal_ideal_def| NIL)
+    (|left_ideal_equiv| FORMULA-DECL NIL |ring_ideal| |algebra|)
+    (|times_associative| FORMULA-DECL NIL |ring| |algebra|)
+    (|R_prod_star_closed| FORMULA-DECL NIL |ring_basic_properties| |algebra|)
+    (|right_ideal_equiv| FORMULA-DECL NIL |ring_ideal| |algebra|)
+    (|left_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|right_principal_ideal_idempotent| FORMULA-DECL NIL
+     |ring_with_one_principal_ideal_def| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|ring?| CONST-DECL "bool" |ring_def| |algebra|)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|right_principal_ideal_is_ideal| FORMULA-DECL NIL
+     |ring_with_one_principal_ideal_def| NIL)
+    (|idempotent?| CONST-DECL "bool" |idempotent_def| NIL))
+   SHOSTAK))
+ (|right_semicentral_iff_ideal| 0
+  (|right_semicentral_iff_ideal-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (COPY -1)
+      (("" (EXPAND "idempotent?" -1)
+        (("" (FLATTEN)
+          (("" (LEMMA "left_principal_ideal_is_ideal" ("R" "R"))
+            (("" (INST -1 "e")
+              (("" (LEMMA "left_principal_ideal_idempotent" ("R" "R" "e" "e"))
+                (("" (ASSERT)
+                  (("" (EXPAND "right_semicentral_idempotent?")
+                    (("" (EXPAND "ideal?")
+                      (("" (SPLIT)
+                        (("1" (FLATTEN)
+                          (("1" (ASSERT)
+                            (("1" (REWRITE "right_ideal_equiv")
+                              (("1" (REWRITE "left_ideal_equiv" -3)
+                                (("1" (FLATTEN)
+                                  (("1" (SPLIT)
+                                    (("1" (PROPAX) NIL NIL)
+                                     ("2" (PROPAX) NIL NIL)
+                                     ("3" (SKEEP :PREDS? T)
+                                      (("3" (SPLIT)
+                                        (("1" (INST -8 "x" "y" "r")
+                                          (("1" (FLATTEN) NIL NIL)) NIL)
+                                         ("2" (INST -4 "r")
+                                          (("2"
+                                            (LEMMA
+                                             "left_principal_ideal_idempotent"
+                                             ("R" "R" "e" "e" "x" "x"))
+                                            (("2"
+                                              (LEMMA
+                                               "left_principal_ideal_idempotent"
+                                               ("R" "R" "e" "e" "x" "x*r"))
+                                              (("2" (ASSERT)
+                                                (("2" (FLATTEN)
+                                                  (("2"
+                                                    (LEMMA "R_prod_star_closed"
+                                                     ("x" "x" "y" "r" "R" "R"))
+                                                    (("2" (EXPAND "member")
+                                                      (("2"
+                                                        (LEMMA
+                                                         "times_associative"
+                                                         ("x" "x" "y" "e" "z"
+                                                          "r"))
+                                                        (("2"
+                                                          (LEMMA
+                                                           "times_associative"
+                                                           ("x" "x*e" "y" "r"
+                                                            "z" "e"))
+                                                          (("2"
+                                                            (LEMMA
+                                                             "times_associative"
+                                                             ("x" "x" "y" "e"
+                                                              "z" "r*e"))
+                                                            (("2"
+                                                              (LEMMA
+                                                               "times_associative"
+                                                               ("x" "e" "y" "r"
+                                                                "z" "e"))
+                                                              (("2" (ASSERT)
+                                                                NIL NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL)
+                         ("2" (FLATTEN)
+                          (("2" (SKEEP)
+                            (("2" (EXPAND "right_ideal?" -1)
+                              (("2" (FLATTEN)
+                                (("2" (EXPAND "right_swallow?" -2)
+                                  (("2" (INST-CP -3 "e")
+                                    (("2"
+                                      (LEMMA "times_associative"
+                                       ("x" "e" "y" "r" "z" "e"))
+                                      (("2" (INST -4 "e*r")
+                                        (("2" (INST -3 "r" "e")
+                                          (("1" (EXPAND "member")
+                                            (("1" (ASSERT) NIL NIL)) NIL)
+                                           ("2" (ASSERT) NIL NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((R SKOLEM-CONST-DECL "(ring_with_one?)" |special_rings_with_one| NIL)
+    (|e| SKOLEM-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|ideal?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|right_ideal?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|right_swallow?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|member| CONST-DECL "bool" |sets| NIL)
+    (|subset_is_partial_order| NAME-JUDGEMENT "(partial_order?[set[T]])"
+     |sets_lemmas| NIL)
+    (|ring| NONEMPTY-TYPE-EQ-DECL NIL |ring| |algebra|)
+    (|left_principal_ideal_unity| CONST-DECL "set[T]"
+     |ring_with_one_principal_ideal_def| NIL)
+    (|right_ideal_equiv| FORMULA-DECL NIL |ring_ideal| |algebra|)
+    (|times_associative| FORMULA-DECL NIL |ring| |algebra|)
+    (|R_prod_star_closed| FORMULA-DECL NIL |ring_basic_properties| |algebra|)
+    (|left_ideal_equiv| FORMULA-DECL NIL |ring_ideal| |algebra|)
+    (|right_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|left_principal_ideal_idempotent| FORMULA-DECL NIL
+     |ring_with_one_principal_ideal_def| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|ring?| CONST-DECL "bool" |ring_def| |algebra|)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|left_principal_ideal_is_ideal| FORMULA-DECL NIL
+     |ring_with_one_principal_ideal_def| NIL)
+    (|idempotent?| CONST-DECL "bool" |idempotent_def| NIL))
+   SHOSTAK))
+ (|semicentral_complement| 0
+  (|semicentral_complement-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (LEMMA "one_unital" ("R" "R"))
+      (("" (CASE "one + inv(one + inv(e)) = e")
+        (("1" (LEMMA "idempotent_complement" ("R" "R" "u" "one" "x" "e"))
+          (("1"
+            (LEMMA "idempotent_complement"
+             ("R" "R" "u" "one" "x" "one + inv(e)"))
+            (("1" (LEMMA "left_semicentral_alt" ("R" "R" "e" "e"))
+              (("1"
+                (LEMMA "right_semicentral_alt" ("R" "R" "e" "one + inv(e)"))
+                (("1" (REPLACE -5)
+                  (("1" (ASSERT)
+                    (("1"
+                      (CASE
+                          "left_semicentral_idempotent?(R)(e) IMPLIES idempotent?[T, *](R)(e)")
+                      (("1"
+                        (CASE
+                            "right_semicentral_idempotent?(R)(one + inv(e)) IMPLIES idempotent?[T, *](R)(one + inv(e))")
+                        (("1" (PROP) NIL NIL)
+                         ("2" (EXPAND "right_semicentral_idempotent?")
+                          (("2" (FLATTEN) NIL NIL)) NIL))
+                        NIL)
+                       ("2" (EXPAND "left_semicentral_idempotent?")
+                        (("2" (FLATTEN) NIL NIL)) NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL)
+         ("2" (REWRITE "negate_plus")
+          (("2" (LEMMA "plus_commutative" ("x" "one" "y" "e + inv(one)"))
+            (("2" (LEMMA "plus_associative" ("x" "e" "y" "inv(one)" "z" "one"))
+              (("2" (ASSERT) NIL NIL)) NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|one_unital| FORMULA-DECL NIL |nilpotent_def| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|inv_inv| FORMULA-DECL NIL |group| |algebra|)
+    (|negate_plus| FORMULA-DECL NIL |ring| |algebra|)
+    (|plus_associative| FORMULA-DECL NIL |ring| |algebra|)
+    (|right_identity| FORMULA-DECL NIL |monad| |algebra|)
+    (|inv_left| FORMULA-DECL NIL |group| |algebra|)
+    (|plus_commutative| FORMULA-DECL NIL |ring| |algebra|)
+    (|ring?| CONST-DECL "bool" |ring_def| |algebra|)
+    (|idempotent_complement| FORMULA-DECL NIL |special_subrings| NIL)
+    (|left_semicentral_alt| FORMULA-DECL NIL |special_rings_with_one| NIL)
+    (|idempotent?| CONST-DECL "bool" |idempotent_def| NIL)
+    (|star_closed?| CONST-DECL "bool" |groupoid_def| |algebra|)
+    (|left_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (IMPLIES CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (|right_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|right_semicentral_alt| FORMULA-DECL NIL |special_rings_with_one| NIL)
+    (= CONST-DECL "[T, T -> boolean]" |equalities| NIL)
+    (AND CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (|inv| CONST-DECL "{y | x * y = one AND y * x = one}" |group| |algebra|))
+   SHOSTAK))
+ (|reduced_abelian_ring| 0
+  (|reduced_abelian_ring-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (EXPAND "abelian_ring?")
+      (("" (SKEEP)
+        (("" (REWRITE "central_idempotent_char")
+          (("" (LEMMA "reduced_idempotent_central" ("R" "R"))
+            (("" (ASSERT)
+              (("" (SKEEP) (("" (INST? :IF-MATCH ALL) NIL NIL)) NIL)) NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|reduced_idempotent_central| FORMULA-DECL NIL |nilpotent_def| NIL)
+    (|idempotent?| CONST-DECL "bool" |idempotent_def| NIL)
+    (|star_closed?| CONST-DECL "bool" |groupoid_def| |algebra|)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|central_idempotent_char| FORMULA-DECL NIL |special_rings_with_one| NIL)
+    (|abelian_ring?| CONST-DECL "bool" |special_rings_with_one| NIL))
+   SHOSTAK))
+ (|boolean_ring_equiv| 0
+  (|boolean_ring_equiv-1| NIL 3970000000
+   ("" (SKEEP :PREDS? T)
+    (("" (EXPAND "boolean_ring?")
+      (("" (EXPAND "idempotent?") (("" (PROPAX) NIL NIL)) NIL)) NIL))
+    NIL)
+   ((|idempotent?| CONST-DECL "bool" |idempotent_def| NIL)
+    (|boolean_ring?| CONST-DECL "bool" |boolean_ring_def| |algebra|))
+   SHOSTAK))
+ (|prime_ring_iff| 0
+  (|prime_ring_iff-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (EXPAND "prime_ring?")
+      (("" (EXPAND "prime_ideal?")
+        (("" (LEMMA "zero_ideal" ("R" "R"))
+          (("" (LEMMA "one_unital" ("R" "R"))
+            (("" (CASE "singleton(zero) = R IFF one = zero")
+              (("1" (SPLIT 1)
+                (("1" (FLATTEN)
+                  (("1" (SPLIT)
+                    (("1" (FLATTEN) (("1" (PROP) NIL NIL)) NIL)
+                     ("2" (EXPAND "prime_ring_with_one?")
+                      (("2" (SKEEP)
+                        (("2"
+                          (CASE
+                              "ideal?(lann(R)(left_principal_ideal_unity(R)(b)), R)")
+                          (("1"
+                            (CASE
+                                "ideal?(rann(R)(lann(R)(left_principal_ideal_unity(R)(b))), R)")
+                            (("1"
+                              (CASE
+                                  "lann(R)(left_principal_ideal_unity(R)(b))(a)")
+                              (("1"
+                                (CASE
+                                    "rann(R)(lann(R)(left_principal_ideal_unity(R)(b)))(b)")
+                                (("1"
+                                  (INST -7
+                                   "lann(R)(left_principal_ideal_unity(R)(b))"
+                                   "rann(R)(lann(R)(left_principal_ideal_unity(R)(b)))")
+                                  (("1" (SPLIT -7)
+                                    (("1" (EXPAND "subset?")
+                                      (("1" (EXPAND "member")
+                                        (("1" (EXPAND "singleton")
+                                          (("1" (INST -1 "a")
+                                            (("1" (ASSERT) NIL NIL)) NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL)
+                                     ("2" (EXPAND "subset?")
+                                      (("2" (EXPAND "member")
+                                        (("2" (EXPAND "singleton")
+                                          (("2" (INST -1 "b")
+                                            (("2" (ASSERT) NIL NIL)) NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL)
+                                     ("3" (EXPAND "subset?")
+                                      (("3" (EXPAND "member")
+                                        (("3" (EXPAND "sum")
+                                          (("3" (EXPAND "singleton")
+                                            (("3" (SKEEP)
+                                              (("3" (SKEEP -1)
+                                                (("3" (TYPEPRED "k")
+                                                  (("3" (EXPAND "rann" -1)
+                                                    (("3" (FLATTEN)
+                                                      (("3" (INST -2 "h")
+                                                        (("3" (ASSERT) NIL
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL)
+                                 ("2" (EXPAND "rann" 1)
+                                  (("2" (TYPEPRED "b")
+                                    (("2" (SKEEP :PREDS? T)
+                                      (("2" (EXPAND "lann" -1)
+                                        (("2" (FLATTEN)
+                                          (("2" (INST -2 "b")
+                                            (("2"
+                                              (EXPAND
+                                               "left_principal_ideal_unity")
+                                              (("2" (INST 1 "one")
+                                                (("1" (EXPAND "unital?")
+                                                  (("1" (FLATTEN)
+                                                    (("1" (INST -12 "b")
+                                                      (("1" (FLATTEN)
+                                                        (("1" (REPLACE -12 1)
+                                                          (("1" (PROPAX) NIL
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL)
+                                                 ("2" (ASSERT)
+                                                  (("2" (EXPAND "unital?" -10)
+                                                    (("2" (PROPAX) NIL NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL)
+                               ("2" (TYPEPRED "a")
+                                (("2" (EXPAND "lann" 1)
+                                  (("2" (SKEEP :PREDS? T)
+                                    (("2"
+                                      (EXPAND "left_principal_ideal_unity" -1)
+                                      (("2" (SKOLEM -1 "r1")
+                                        (("2" (REPLACE -1)
+                                          (("2"
+                                            (LEMMA "times_associative"
+                                             ("x" "a" "y" "r1" "z" "b"))
+                                            (("2" (INST -6 "r1")
+                                              (("2" (ASSERT) NIL NIL)) NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL)
+                             ("2"
+                              (LEMMA "rann_ideal"
+                               ("R" "R" "S"
+                                "lann(R)(left_principal_ideal_unity(R)(b))"))
+                              (("2" (EXPAND "ideal?" -2)
+                                (("2" (FLATTEN) (("2" (ASSERT) NIL NIL)) NIL))
+                                NIL))
+                              NIL))
+                            NIL)
+                           ("2"
+                            (LEMMA "left_principal_ideal_is_ideal" ("R" "R"))
+                            (("2" (INST -1 "b")
+                              (("2"
+                                (LEMMA "lann_ideal"
+                                 ("R" "R" "S"
+                                  "left_principal_ideal_unity(R)(b)"))
+                                (("2" (PROP) NIL NIL)) NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL)
+                 ("2" (FLATTEN)
+                  (("2" (SPLIT)
+                    (("1" (PROPAX) NIL NIL) ("2" (PROP) NIL NIL)
+                     ("3" (SKEEP)
+                      (("3" (EXPAND "subset?")
+                        (("3" (EXPAND "member")
+                          (("3" (EXPAND "singleton")
+                            (("3" (EXPAND "sum")
+                              (("3" (SKEEP 1)
+                                (("3" (SKEEP 2)
+                                  (("3" (TYPEPRED "A")
+                                    (("3" (TYPEPRED "B")
+                                      (("3"
+                                        (LEMMA "right_ideal_equiv"
+                                         ("R" "R" "I" "A"))
+                                        (("3"
+                                          (LEMMA "right_ideal_equiv"
+                                           ("R" "R" "I" "B"))
+                                          (("3" (EXPAND "ideal?" -3)
+                                            (("3" (EXPAND "ideal?" -4)
+                                              (("3" (FLATTEN)
+                                                (("3" (ASSERT)
+                                                  (("3" (FLATTEN)
+                                                    (("3" (EXPAND "subset?")
+                                                      (("3" (EXPAND "member")
+                                                        (("3"
+                                                          (EXPAND
+                                                           "prime_ring_with_one?")
+                                                          (("3" (INST -6 "x")
+                                                            (("3"
+                                                              (INST -2 "x!1")
+                                                              (("3" (ASSERT)
+                                                                (("3"
+                                                                  (INST -16 "x"
+                                                                   "x!1")
+                                                                  (("3"
+                                                                    (SPLIT -16)
+                                                                    (("1"
+                                                                      (PROPAX)
+                                                                      NIL NIL)
+                                                                     ("2"
+                                                                      (PROPAX)
+                                                                      NIL NIL)
+                                                                     ("3"
+                                                                      (SKEEP)
+                                                                      (("3"
+                                                                        (INST
+                                                                         -13
+                                                                         "x*r*x!1")
+                                                                        (("3"
+                                                                          (SPLIT
+                                                                           -13)
+                                                                          (("1"
+                                                                            (PROPAX)
+                                                                            NIL
+                                                                            NIL)
+                                                                           ("2"
+                                                                            (INST
+                                                                             1
+                                                                             "x*r"
+                                                                             "x!1")
+                                                                            (("2"
+                                                                              (INST
+                                                                               -7
+                                                                               "x"
+                                                                               "x"
+                                                                               "r")
+                                                                              (("2"
+                                                                                (FLATTEN)
+                                                                                NIL
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL))
+                                                                    NIL))
+                                                                  NIL))
+                                                                NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL)
+               ("2" (HIDE 2)
+                (("2" (EXPAND "unital?")
+                  (("2" (FLATTEN)
+                    (("2" (SPLIT)
+                      (("1" (FLATTEN)
+                        (("1" (DECOMPOSE-EQUALITY -1)
+                          (("1" (INST -1 "one")
+                            (("1" (EXPAND "singleton")
+                              (("1" (IFF -1) (("1" (PROP) NIL NIL)) NIL)) NIL))
+                            NIL))
+                          NIL))
+                        NIL)
+                       ("2" (FLATTEN)
+                        (("2" (APPLY-EXTENSIONALITY 1 :HIDE? T)
+                          (("2" (EXPAND "singleton")
+                            (("2" (IFF)
+                              (("2" (SPLIT)
+                                (("1" (FLATTEN)
+                                  (("1" (REPLACE -1)
+                                    (("1" (LEMMA "zero_is_member_R" ("R" "R"))
+                                      (("1" (EXPAND "member")
+                                        (("1" (PROPAX) NIL NIL)) NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL)
+                                 ("2" (FLATTEN)
+                                  (("2" (LEMMA "times_zero" ("x" "x!1"))
+                                    (("2" (REPLACE -3 -1 RL)
+                                      (("2" (ASSERT) NIL NIL)) NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|prime_ring?| CONST-DECL "bool" |special_rings_with_one| NIL)
+    (|zero_ideal| FORMULA-DECL NIL |ring_ideal| |algebra|)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|ring?| CONST-DECL "bool" |ring_def| |algebra|)
+    (|ring| NONEMPTY-TYPE-EQ-DECL NIL |ring| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|singleton| CONST-DECL "(singleton?)" |sets| NIL)
+    (|singleton?| CONST-DECL "bool" |sets| NIL)
+    (= CONST-DECL "[T, T -> boolean]" |equalities| NIL)
+    (IFF CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (|nonempty_singleton_finite| APPLICATION-JUDGEMENT "non_empty_finite_set"
+     |finite_sets| NIL)
+    (|subset_is_partial_order| NAME-JUDGEMENT "(partial_order?[set[T]])"
+     |sets_lemmas| NIL)
+    (|r| SKOLEM-CONST-DECL "(R)" |special_rings_with_one| NIL)
+    (|x| SKOLEM-CONST-DECL "T" |special_rings_with_one| NIL)
+    (A SKOLEM-CONST-DECL "ideal[T, +, *, zero](R)" |special_rings_with_one|
+     NIL)
+    (|right_ideal_equiv| FORMULA-DECL NIL |ring_ideal| |algebra|)
+    (|prime_ring_with_one?| CONST-DECL "bool" |special_rings_with_one| NIL)
+    (|left_principal_ideal_unity| CONST-DECL "set[T]"
+     |ring_with_one_principal_ideal_def| NIL)
+    (|lann| CONST-DECL "set[T]" |special_subrings| NIL)
+    (|ideal?| CONST-DECL "bool" |ring_ideal_def| |algebra|)
+    (|rann_ideal| FORMULA-DECL NIL |special_subrings| NIL)
+    (|unital?| CONST-DECL "bool" |special_subrings| NIL)
+    (|ideal| TYPE-EQ-DECL NIL |ring_ideal_def| |algebra|)
+    (R SKOLEM-CONST-DECL "(ring_with_one?)" |special_rings_with_one| NIL)
+    (|b| SKOLEM-CONST-DECL "(R)" |special_rings_with_one| NIL)
+    (|sum| CONST-DECL "set[T]" |cosets_def| |algebra|)
+    (NOT CONST-DECL "[bool -> bool]" |booleans| NIL)
+    (|subset?| CONST-DECL "bool" |sets| NIL)
+    (|member| CONST-DECL "bool" |sets| NIL)
+    (|times_associative| FORMULA-DECL NIL |ring| |algebra|)
+    (|rann| CONST-DECL "set[T]" |special_subrings| NIL)
+    (|lann_ideal| FORMULA-DECL NIL |special_subrings| NIL)
+    (|left_principal_ideal_is_ideal| FORMULA-DECL NIL
+     |ring_with_one_principal_ideal_def| NIL)
+    (|one_times| FORMULA-DECL NIL |ring_with_one| |algebra|)
+    (|times_one| FORMULA-DECL NIL |ring_with_one| |algebra|)
+    (|times_zero| FORMULA-DECL NIL |ring| |algebra|)
+    (|zero_is_member_R| FORMULA-DECL NIL |ring_basic_properties| |algebra|)
+    (|one_unital| FORMULA-DECL NIL |nilpotent_def| NIL)
+    (|prime_ideal?| CONST-DECL "bool" |ring_prime_ideal_def| |algebra|))
+   SHOSTAK))
+ (|prime_is_semicentral_reduced| 0
+  (|prime_is_semicentral_reduced-1| NIL 3970000000
+   ("" (SKEEP)
+    (("" (EXPAND "semicentral_reduced?")
+      (("" (SKEEP)
+        (("" (EXPAND "semicentral_idempotent?")
+          (("" (LEMMA "one_unital" ("R" "R"))
+            (("" (EXPAND "unital?" -1)
+              (("" (FLATTEN)
+                (("" (LEMMA "inv_is_member_R" ("x" "e" "R" "R"))
+                  ((""
+                    (LEMMA "R_sum_star_closed"
+                     ("x" "one" "y" "inv(e)" "R" "R"))
+                    (("" (EXPAND "member")
+                      (("" (ASSERT)
+                        ((""
+                          (LEMMA "cancel_right_minus"
+                           ("x" "one" "y" "e" "z" "e"))
+                          (("" (ASSERT)
+                            ((""
+                              (LEMMA "left_semicentral_alt" ("R" "R" "e" "e"))
+                              ((""
+                                (LEMMA "right_semicentral_alt"
+                                 ("R" "R" "e" "e"))
+                                (("" (EXPAND "prime_ring_with_one?")
+                                  (("" (COPY -7)
+                                    (("" (INST -1 "one + inv(e)" "e")
+                                      (("" (INST -8 "e" "one + inv(e)")
+                                        (("" (CASE "idempotent?[T, *](R)(e)")
+                                          (("1" (PROP) NIL NIL)
+                                           ("2"
+                                            (EXPAND
+                                             "left_semicentral_idempotent?")
+                                            (("2"
+                                              (EXPAND
+                                               "right_semicentral_idempotent?")
+                                              (("2" (PROP) NIL NIL)) NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((|semicentral_reduced?| CONST-DECL "bool" |special_rings_with_one| NIL)
+    (|semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one| NIL)
+    (|unital?| CONST-DECL "bool" |special_subrings| NIL)
+    (|ring?| CONST-DECL "bool" |ring_def| |algebra|)
+    (|inv_is_member_R| FORMULA-DECL NIL |ring_basic_properties| |algebra|)
+    (|member| CONST-DECL "bool" |sets| NIL)
+    (|cancel_right_minus| FORMULA-DECL NIL |ring| |algebra|)
+    (|left_semicentral_alt| FORMULA-DECL NIL |special_rings_with_one| NIL)
+    (|prime_ring_with_one?| CONST-DECL "bool" |special_rings_with_one| NIL)
+    (|idempotent?| CONST-DECL "bool" |idempotent_def| NIL)
+    (|star_closed?| CONST-DECL "bool" |groupoid_def| |algebra|)
+    (|right_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|left_semicentral_idempotent?| CONST-DECL "bool" |special_rings_with_one|
+     NIL)
+    (|right_semicentral_alt| FORMULA-DECL NIL |special_rings_with_one| NIL)
+    (|inv_right| FORMULA-DECL NIL |group| |algebra|)
+    (|times_one| FORMULA-DECL NIL |ring_with_one| |algebra|)
+    (|one_times| FORMULA-DECL NIL |ring_with_one| |algebra|)
+    (|R_sum_star_closed| FORMULA-DECL NIL |ring_basic_properties| |algebra|)
+    (AND CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (= CONST-DECL "[T, T -> boolean]" |equalities| NIL)
+    (|inv| CONST-DECL "{y | x * y = one AND y * x = one}" |group| |algebra|)
+    (|one| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (|zero| FORMAL-CONST-DECL "T" |special_rings_with_one| NIL)
+    (* FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (+ FORMAL-CONST-DECL "[T, T -> T]" |special_rings_with_one| NIL)
+    (T FORMAL-NONEMPTY-TYPE-DECL NIL |special_rings_with_one| NIL)
+    (|ring_with_one?| CONST-DECL "bool" |ring_with_one_def| |algebra|)
+    (|set| TYPE-EQ-DECL NIL |sets| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|one_unital| FORMULA-DECL NIL |nilpotent_def| NIL))
+   SHOSTAK)))

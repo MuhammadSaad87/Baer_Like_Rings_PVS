@@ -1,0 +1,30 @@
+%% =============================================================================
+%% idempotent_def
+%%   Idempotent elements of a groupoid (S, *).
+%%
+%% =============================================================================
+
+idempotent_def [T: TYPE+, *: [T, T -> T]]: THEORY
+BEGIN
+
+  IMPORTING algebra@groupoid_def[T, *]
+
+  G, H: VAR (groupoid?)
+  e:    VAR T
+
+  % An element e of a groupoid G is idempotent if it lies in G and e*e = e.
+  idempotent?(G)(e): bool = G(e) AND e * e = e
+
+  idempotent(G): TYPE = (idempotent?(G))
+
+  idempotent_member: LEMMA
+    idempotent?(G)(e) IMPLIES G(e)
+
+  idempotent_square: LEMMA
+    idempotent?(G)(e) IMPLIES e * e = e
+
+  % Idempotency is inherited by super-groupoids.
+  idempotent_subset: LEMMA
+    subset?(H, G) AND idempotent?(H)(e) IMPLIES idempotent?(G)(e)
+
+END idempotent_def

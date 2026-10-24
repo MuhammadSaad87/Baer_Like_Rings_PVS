@@ -1,0 +1,163 @@
+%% =============================================================================
+%% baer_ring_def
+%%  =============================================================================
+
+baer_ring_def [T: TYPE+, +, *: [T, T -> T], zero, one: T]: THEORY
+BEGIN
+
+  ASSUMING
+    IMPORTING algebra@ring_with_one_def[T, +, *, zero, one]
+    fullset_is_ring_with_one: ASSUMPTION ring_with_one?(fullset[T])
+  ENDASSUMING
+
+  IMPORTING algebra@ring_with_one[T, +, *, zero, one],
+            idempotent_def[T, *],
+            special_subrings[T, +, *, zero],
+            ring_with_one_principal_ideal_def[T, +, *, zero],
+            nilpotent_def[T, +, *, zero, one],
+            special_rings_with_one[T, +, *, zero, one]
+
+  R: VAR (ring?)
+  U: VAR (ring_with_one?)
+
+  %% ---------------------------------------------------------------------------
+  %% Baer rings
+  %% ---------------------------------------------------------------------------
+
+  baer_ring?(R): bool =
+    FORALL (S: set[T]):
+      nonempty?(S) AND subset?(S, R) IMPLIES
+        EXISTS (e: (idempotent?[T, *](R))):
+          rann(R)(S) = right_principal_ideal_unity(R)(e)
+
+  left_baer_ring?(R): bool =
+    FORALL (S: set[T]):
+      nonempty?(S) AND subset?(S, R) IMPLIES
+        EXISTS (e: (idempotent?[T, *](R))):
+          lann(R)(S) = left_principal_ideal_unity(R)(e)
+
+  % Left-right symmetry (Kaplansky).
+  baer_equiv: LEMMA
+    baer_ring?(U) IFF left_baer_ring?(U)
+
+  %% ---------------------------------------------------------------------------
+  %% Rickart rings
+  %% ---------------------------------------------------------------------------
+
+  right_rickart_ring?(R): bool =
+    FORALL (a: (R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        rann(R)(singleton(a)) = right_principal_ideal_unity(R)(e)
+
+  left_rickart_ring?(R): bool =
+    FORALL (a: (R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        lann(R)(singleton(a)) = left_principal_ideal_unity(R)(e)
+
+  rickart_ring?(R): bool =
+    right_rickart_ring?(R) AND left_rickart_ring?(R)
+
+  baer_is_right_rickart: LEMMA
+    baer_ring?(R) IMPLIES right_rickart_ring?(R)
+
+  left_baer_is_left_rickart: LEMMA
+    left_baer_ring?(R) IMPLIES left_rickart_ring?(R)
+
+  baer_is_rickart: LEMMA
+    baer_ring?(U) IMPLIES rickart_ring?(U)
+
+  %% ---------------------------------------------------------------------------
+  %% Quasi-Baer rings
+  %% ---------------------------------------------------------------------------
+
+  quasi_baer_ring?(R): bool =
+    FORALL (I: right_ideal(R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        rann(R)(I) = right_principal_ideal_unity(R)(e)
+
+  left_quasi_baer_ring?(R): bool =
+    FORALL (I: left_ideal(R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        lann(R)(I) = left_principal_ideal_unity(R)(e)
+
+  % Clark's original condition: two-sided ideals, right annihilators.
+  ideal_right_quasi_baer?(R): bool =
+    FORALL (I: ideal(R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        rann(R)(I) = right_principal_ideal_unity(R)(e)
+
+  ideal_left_quasi_baer?(R): bool =
+    FORALL (I: ideal(R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        lann(R)(I) = left_principal_ideal_unity(R)(e)
+
+  % Helpers for Clark's theorem (left-hand mirror and the two ideal conditions).
+  left_quasi_baer_iff_ideal_left: LEMMA
+    left_quasi_baer_ring?(U) IFF ideal_left_quasi_baer?(U)
+
+  ideal_right_iff_ideal_left: LEMMA
+    ideal_right_quasi_baer?(U) IFF ideal_left_quasi_baer?(U)
+
+  quasi_baer_iff_ideal_right: LEMMA
+    quasi_baer_ring?(U) IFF ideal_right_quasi_baer?(U)
+
+  quasi_baer_iff_ideal_left: LEMMA
+    quasi_baer_ring?(U) IFF ideal_left_quasi_baer?(U)
+
+  quasi_baer_iff_left: LEMMA
+    quasi_baer_ring?(U) IFF left_quasi_baer_ring?(U)
+
+  % Clark's theorem (the four conditions of the paper are equivalent).
+  quasi_baer_equiv: LEMMA
+    quasi_baer_ring?(U) IFF
+      (left_quasi_baer_ring?(U) AND
+       ideal_left_quasi_baer?(U) AND
+       ideal_right_quasi_baer?(U))
+
+  baer_is_quasi_baer: LEMMA
+    baer_ring?(R) IMPLIES quasi_baer_ring?(R)
+
+  %% ---------------------------------------------------------------------------
+  %% Principally quasi-Baer rings
+  %% ---------------------------------------------------------------------------
+
+  right_pq_baer_ring?(R): bool =
+    FORALL (a: (R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        rann(R)(right_principal_ideal_unity(R)(a)) =
+          right_principal_ideal_unity(R)(e)
+
+  left_pq_baer_ring?(R): bool =
+    FORALL (a: (R)):
+      EXISTS (e: (idempotent?[T, *](R))):
+        lann(R)(left_principal_ideal_unity(R)(a)) =
+          left_principal_ideal_unity(R)(e)
+
+  pq_baer_ring?(R): bool =
+    right_pq_baer_ring?(R) AND left_pq_baer_ring?(R)
+
+  % One-sided principal ideals may be replaced by two-sided ones (needs 1).
+  right_pq_baer_equiv: LEMMA
+    right_pq_baer_ring?(U) IFF
+      FORALL (a: (U)):
+        EXISTS (e: (idempotent?[T, *](U))):
+          rann(U)(principal_ideal_unity(U)(a)) =
+            right_principal_ideal_unity(U)(e)
+
+  left_pq_baer_equiv: LEMMA
+    left_pq_baer_ring?(U) IFF
+      FORALL (a: (U)):
+        EXISTS (e: (idempotent?[T, *](U))):
+          lann(U)(principal_ideal_unity(U)(a)) =
+            left_principal_ideal_unity(U)(e)
+
+  quasi_baer_is_right_pq_baer: LEMMA
+    quasi_baer_ring?(R) IMPLIES right_pq_baer_ring?(R)
+
+  left_quasi_baer_is_left_pq_baer: LEMMA
+    left_quasi_baer_ring?(R) IMPLIES left_pq_baer_ring?(R)
+
+  quasi_baer_is_pq_baer: LEMMA
+    quasi_baer_ring?(U) IMPLIES pq_baer_ring?(U)
+
+END baer_ring_def

@@ -1,0 +1,13 @@
+(|idempotent_def|
+ (|idempotent_member| 0
+  (|idempotent_member-1| NIL 3970000000
+   ("" (grind) NIL NIL)
+   NIL SHOSTAK))
+ (|idempotent_square| 0
+  (|idempotent_square-1| NIL 3970000000
+   ("" (grind) NIL NIL)
+   NIL SHOSTAK))
+ (|idempotent_subset| 0
+  (|idempotent_subset-1| NIL 3970000000
+   ("" (grind) NIL NIL)
+   NIL SHOSTAK)))

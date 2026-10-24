@@ -1,0 +1,115 @@
+%% =============================================================================
+%% special_rings_with_one
+%%   Semicentral / central idempotents, Abelian, semicentral reduced and prime
+%%   rings with identity; link to NASALib's prime ideals and Boolean rings.
+%% =============================================================================
+
+special_rings_with_one [T: TYPE+, +, *: [T, T -> T], zero, one: T]: THEORY
+BEGIN
+
+  ASSUMING
+    IMPORTING algebra@ring_with_one_def[T, +, *, zero, one]
+    fullset_is_ring_with_one: ASSUMPTION ring_with_one?(fullset[T])
+  ENDASSUMING
+
+  IMPORTING algebra@ring_with_one[T, +, *, zero, one],
+            algebra@ring_prime_ideal_def[T, +, *, zero],
+            algebra@boolean_ring_def[T, +, *, zero],
+            idempotent_def[T, *],
+            nilpotent_def[T, +, *, zero, one],
+            special_subrings[T, +, *, zero],
+            ring_with_one_principal_ideal_def[T, +, *, zero]
+
+  R:          VAR (ring_with_one?)
+  Rg:         VAR (ring?)
+  a, b, e, r: VAR T
+
+  %% ---------------------------------------------------------------------------
+  %% Semicentral and central idempotents
+  %% ---------------------------------------------------------------------------
+
+  % e is left semicentral iff  r e = e r e  for all r  (equivalently (1-e)Re = 0).
+  left_semicentral_idempotent?(R)(e): bool =
+    idempotent?[T, *](R)(e) AND FORALL (r: (R)): e * r * e = r * e
+
+  % e is right semicentral iff  e r = e r e  for all r  (equivalently eR(1-e) = 0).
+  right_semicentral_idempotent?(R)(e): bool =
+    idempotent?[T, *](R)(e) AND FORALL (r: (R)): e * r * e = e * r
+
+  semicentral_idempotent?(R)(e): bool =
+    left_semicentral_idempotent?(R)(e) OR right_semicentral_idempotent?(R)(e)
+
+  central_idempotent?(R)(e): bool =
+    left_semicentral_idempotent?(R)(e) AND right_semicentral_idempotent?(R)(e)
+
+  % The paper's definition via (1-e)Re = 0.
+  left_semicentral_alt: LEMMA
+    idempotent?[T, *](R)(e) IMPLIES
+      (left_semicentral_idempotent?(R)(e) IFF
+         FORALL (r: (R)): (one + inv(e)) * r * e = zero)
+
+  right_semicentral_alt: LEMMA
+    idempotent?[T, *](R)(e) IMPLIES
+      (right_semicentral_idempotent?(R)(e) IFF
+         FORALL (r: (R)): e * r * (one + inv(e)) = zero)
+
+  central_idempotent_char: LEMMA
+    central_idempotent?(R)(e) IFF
+      (idempotent?[T, *](R)(e) AND FORALL (r: (R)): e * r = r * e)
+
+  % e is left (right) semicentral iff eR (Re) is a two-sided ideal.
+  left_semicentral_iff_ideal: LEMMA
+    idempotent?[T, *](R)(e) IMPLIES
+      (left_semicentral_idempotent?(R)(e) IFF
+         ideal?(right_principal_ideal_unity(R)(e), R))
+
+  right_semicentral_iff_ideal: LEMMA
+    idempotent?[T, *](R)(e) IMPLIES
+      (right_semicentral_idempotent?(R)(e) IFF
+         ideal?(left_principal_ideal_unity(R)(e), R))
+
+  % e is left semicentral iff 1 - e is right semicentral.
+  semicentral_complement: LEMMA
+    left_semicentral_idempotent?(R)(e) IFF
+      right_semicentral_idempotent?(R)(one + inv(e))
+
+  %% ---------------------------------------------------------------------------
+  %% Abelian and semicentral reduced rings
+  %% ---------------------------------------------------------------------------
+
+  abelian_ring?(R): bool =
+    FORALL (e: (idempotent?[T, *](R))): central_idempotent?(R)(e)
+
+  semicentral_reduced?(R): bool =
+    FORALL (e: (R)): semicentral_idempotent?(R)(e) IMPLIES (e = zero OR e = one)
+
+  reduced_abelian_ring: LEMMA
+    reduced_ring?(R) IMPLIES abelian_ring?(R)
+
+  %% ---------------------------------------------------------------------------
+  %% Boolean rings (NASALib boolean_ring?)
+  %% ---------------------------------------------------------------------------
+
+  boolean_ring_equiv: LEMMA
+    boolean_ring?(Rg) IFF FORALL (x: (Rg)): idempotent?[T, *](Rg)(x)
+
+  %% ---------------------------------------------------------------------------
+  %% Prime rings
+  %% ---------------------------------------------------------------------------
+
+  % Ideal-theoretic definition: {0} is a prime ideal (NASALib prime_ideal?).
+  prime_ring?(Rg): bool = prime_ideal?(singleton(zero), Rg)
+
+  % Element-wise characterisation for rings with identity.
+  prime_ring_with_one?(R): bool =
+    FORALL (a, b: (R)):
+      (FORALL (r: (R)): a * r * b = zero) IMPLIES (a = zero OR b = zero)
+
+  % The two definitions agree on non-zero rings with identity.
+  prime_ring_iff: LEMMA
+    prime_ring?(R) IFF (one /= zero AND prime_ring_with_one?(R))
+
+  prime_is_semicentral_reduced: LEMMA
+    prime_ring_with_one?(R) IMPLIES semicentral_reduced?(R)
+
+END special_rings_with_one

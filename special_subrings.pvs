@@ -1,0 +1,147 @@
+%% =============================================================================
+%% special_subrings
+%%   Annihilators, unital subrings, the center and the corners of a ring.
+%% =============================================================================
+
+special_subrings [T: TYPE+, +, *: [T, T -> T], zero: T]: THEORY
+BEGIN
+
+  ASSUMING
+    IMPORTING algebra@ring_def[T, +, *, zero]
+    fullset_is_ring: ASSUMPTION ring?(fullset[T])
+  ENDASSUMING
+
+  IMPORTING algebra@ring[T, +, *, zero],
+            algebra@ring_basic_properties[T, +, *, zero],
+            algebra@ring_ideal[T, +, *, zero],
+            algebra@ring_center[T, +, *, zero],
+            idempotent_def[T, *]
+
+  R, R1:     VAR (ring?)
+  S, S1, S2: VAR set[T]
+  u, v, x:   VAR T
+
+  % Every ring is a multiplicative groupoid; this lets idempotent?[T,*](R)
+  % be applied to rings without a fresh TCC at every use.
+  ring_is_groupoid: JUDGEMENT (ring?) SUBTYPE_OF (groupoid?[T, *])
+
+  %% ---------------------------------------------------------------------------
+  %% Annihilators
+  %% ---------------------------------------------------------------------------
+
+  rann(R)(S): set[T] = {x: T | R(x) AND FORALL (s: (S)): s * x = zero}
+
+  lann(R)(S): set[T] = {x: T | R(x) AND FORALL (s: (S)): x * s = zero}
+
+  ann(R)(S): set[T] = intersection(rann(R)(S), lann(R)(S))
+
+  rann_subset: LEMMA subset?(rann(R)(S), R)
+
+  lann_subset: LEMMA subset?(lann(R)(S), R)
+
+  rann_right_ideal: LEMMA right_ideal?(rann(R)(S), R)
+
+  lann_left_ideal: LEMMA left_ideal?(lann(R)(S), R)
+
+  annihilators_are_ideals: LEMMA
+    right_ideal?(rann(R)(S), R) AND left_ideal?(lann(R)(S), R)
+
+  % The right annihilator of a right ideal (left annihilator of a left ideal)
+  % is a two-sided ideal.
+  rann_ideal: LEMMA right_ideal?(S, R) IMPLIES ideal?(rann(R)(S), R)
+
+  lann_ideal: LEMMA left_ideal?(S, R) IMPLIES ideal?(lann(R)(S), R)
+
+  % Galois connection between lann and rann.
+  rann_antitone: LEMMA
+    subset?(S1, S2) IMPLIES subset?(rann(R)(S2), rann(R)(S1))
+
+  lann_antitone: LEMMA
+    subset?(S1, S2) IMPLIES subset?(lann(R)(S2), lann(R)(S1))
+
+  subset_lann_rann: LEMMA
+    subset?(S, R) IMPLIES subset?(S, lann(R)(rann(R)(S)))
+
+  subset_rann_lann: LEMMA
+    subset?(S, R) IMPLIES subset?(S, rann(R)(lann(R)(S)))
+
+  rann_lann_rann: LEMMA
+    subset?(S, R) IMPLIES rann(R)(lann(R)(rann(R)(S))) = rann(R)(S)
+
+  lann_rann_lann: LEMMA
+    subset?(S, R) IMPLIES lann(R)(rann(R)(lann(R)(S))) = lann(R)(S)
+
+  % Annihilators computed inside a subring.
+  rann_subring: LEMMA
+    subset?(R1, R) IMPLIES rann(R1)(S) = intersection(R1, rann(R)(S))
+
+  lann_subring: LEMMA
+    subset?(R1, R) IMPLIES lann(R1)(S) = intersection(R1, lann(R)(S))
+
+  %% ---------------------------------------------------------------------------
+  %% Identity elements of a (sub)ring
+  %% ---------------------------------------------------------------------------
+
+  unital?(R)(u): bool = R(u) AND FORALL (x: (R)): u * x = x AND x * u = x
+
+  unital_unique: LEMMA
+    unital?(R)(u) AND unital?(R)(v) IMPLIES u = v
+
+  unital_idempotent: LEMMA
+    unital?(R)(u) IMPLIES idempotent?[T, *](R)(u)
+
+  % If u is the identity of R and e is idempotent, so is u - e.
+  idempotent_complement: LEMMA
+    unital?(R)(u) AND idempotent?[T, *](R)(x) IMPLIES
+      idempotent?[T, *](R)(u + inv(x))
+
+  complement_orthogonal: LEMMA
+    unital?(R)(u) AND idempotent?[T, *](R)(x) IMPLIES
+      x * (u + inv(x)) = zero AND (u + inv(x)) * x = zero
+
+  %% ---------------------------------------------------------------------------
+  %% The center (NASALib's center[T,*], typed as a ring)
+  %% ---------------------------------------------------------------------------
+
+  ring_center(R): (ring?) = center[T, *](R)
+
+  center_is_subring: LEMMA subring?(ring_center(R), R)
+
+  ring_center_char: LEMMA
+    ring_center(R)(x) IFF (R(x) AND FORALL (r: (R)): r * x = x * r)
+
+  ring_center_unital: LEMMA
+    unital?(R)(u) IMPLIES unital?(ring_center(R))(u)
+
+  %% ---------------------------------------------------------------------------
+  %% Corners eRe
+  %% ---------------------------------------------------------------------------
+
+  % The result type (ring?) generates one TCC (eRe is a ring) at this
+  % declaration; afterwards corners can be passed wherever a ring is expected.
+  corner(R)(e: (idempotent?[T, *](R))): (ring?) =
+    {t: T | EXISTS (r: (R)): t = e * r * e}
+
+  corner_char: LEMMA
+    FORALL (e: (idempotent?[T, *](R))):
+      corner(R)(e)(x) IFF (R(x) AND e * x = x AND x * e = x)
+
+  corner_is_subring: LEMMA
+    FORALL (e: (idempotent?[T, *](R))):
+      subring?(corner(R)(e), R) AND
+      FORALL (t: (corner(R)(e))): e * t = t AND t * e = t
+
+  % The identity of eRe is e.
+  corner_unital: LEMMA
+    FORALL (e: (idempotent?[T, *](R))): unital?(corner(R)(e))(e)
+
+  corner_idempotent: LEMMA
+    FORALL (e: (idempotent?[T, *](R))):
+      idempotent?[T, *](corner(R)(e))(x) IFF
+        (idempotent?[T, *](R)(x) AND e * x = x AND x * e = x)
+
+  % The corner at the identity is the whole ring.
+  corner_of_unit: LEMMA
+    unital?(R)(u) IMPLIES corner(R)(u) = R
+
+END special_subrings
